@@ -40,6 +40,7 @@ Modern CLI tools and utilities for daily development workflow, plus the classic 
 | `ncdu` | `brew install ncdu` | Disk usage analyzer |
 | `tree` | `brew install tree` | Directory tree display |
 | `watchexec` | `brew install watchexec` | Run commands on file changes |
+| `unison` | `brew install unison` | Bidirectional file/folder synchronization |
 
 ## Quick Install All Essentials
 
@@ -148,6 +149,99 @@ rsync -avzn localdir/ user@host:/remote/path/
 # Delete files on destination that don't exist on source
 rsync -avz --delete localdir/ user@host:/remote/path/
 ```
+
+### Unison — Bidirectional File Synchronization
+
+Unison is a file-synchronization tool that allows two replicas of a collection of files and directories to be stored on different hosts (or different disks on the same host), modified separately, and then brought up to date by propagating the changes in each replica to the other.
+
+Unlike rsync (which is unidirectional), Unison detects conflicts and handles bidirectional sync intelligently.
+
+```bash
+# Install
+brew install unison
+
+# Basic local sync (interactive — shows changes and asks for confirmation)
+unison /path/to/source /path/to/destination
+
+# Non-interactive batch mode (auto-propagate non-conflicting changes)
+unison -batch /path/to/source /path/to/destination
+
+# Remote sync (requires SSH access)
+unison /local/path ssh://user@remotehost//remote/path
+
+# Sync with specific SSH port
+unison /local/path ssh://user@remotehost:2222//remote/path
+
+# Prefer changes from source (auto-resolve conflicts in favor of source)
+unison -prefer /path/to/source -batch /path/to/source /path/to/destination
+
+# Sync with ignore patterns
+unison -ignore='Path .git' -ignore='Name *.log' /source /destination
+
+# Repeat sync every 30 seconds (useful for continuous backup)
+unison -repeat 30 /source /destination
+
+# Dry run — preview changes without applying them
+unison -testserver /source /destination
+```
+
+Profile configuration (save to `~/.unison/default.prf`):
+
+```
+# Root directories to synchronize
+root = /Users/edy/projects
+root = /Volumes/backup/projects
+
+# Paths to include (relative to root)
+path = src
+path = docs
+
+# Paths to ignore
+ignore = Path .git
+ignore = Path node_modules
+ignore = Path .DS_Store
+ignore = Name *.tmp
+ignore = Name .env*
+
+# Auto-resolve conflicts
+prefer = newer
+auto = true
+batch = true
+
+# Logging
+log = true
+logfile = /var/log/unison.log
+```
+
+After creating the profile, simply run:
+
+```bash
+# Use default profile
+unison
+
+# Use a specific profile
+unison work-sync
+```
+
+Key flags:
+
+| Flag | Description |
+|------|-------------|
+| `-batch` | Run without user interaction (non-interactive) |
+| `-auto` | Automatically accept non-conflicting changes |
+| `-prefer newer` | Resolve conflicts by choosing the newer file |
+| `-prefer <path>` | Resolve conflicts by preferring one replica |
+| `-ignore 'Path ...'` | Exclude a directory or file path |
+| `-ignore 'Name ...'` | Exclude by filename pattern |
+| `-force <path>` | Force propagation from one side (use with caution) |
+| `-repeat N` | Repeat sync every N seconds |
+| `-testserver` | Verify connection without syncing |
+| `-silent` | Suppress output |
+| `-times` | Sync modification times (disabled by default on some systems) |
+
+Typical use cases: keeping a laptop and desktop in sync, mirroring project directories to an external drive or NAS, maintaining identical dotfiles across machines, continuous backup of work in progress.
+
+Important notes: both sides must have the same major version of Unison installed (e.g., 2.53.x on both). When using remote sync, Unison must be installed on both the local and remote machines. Unison stores synchronization state in `~/.unison/` on each host.
 
 ### colorls — Colorful ls
 

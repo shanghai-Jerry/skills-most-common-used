@@ -231,6 +231,7 @@ Read `references/macos-defaults.md` for batch system optimization via `defaults`
 
 Read `references/cli-tools.md` for:
 - **tldr** — Simplified man pages
+- **rsync** / **unison** — File synchronization (unidirectional / bidirectional)
 - **SwitchHosts** — Host file switcher
 - **Snipaste** — Screenshot pinning tool
 
