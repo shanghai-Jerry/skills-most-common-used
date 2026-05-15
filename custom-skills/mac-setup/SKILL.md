@@ -19,7 +19,8 @@ mac-setup/
     ├── vim-config.md                 ← ~/.vimrc complete template
     ├── tmux-config.md                ← ~/.tmux.conf complete template (C-a prefix/mouse/UI design)
     ├── ssh-config.md                 ← ~/.ssh/config format + port forwarding
-    ├── cli-tools.md                  ← Modern CLI tools + utility tools (tldr/SwitchHosts/Snipaste)
+    ├── cli-tools.md                  ← Modern CLI tools (ripgrep/fzf/lazygit/tldr/opencode/claude code)
+    ├── gui-apps.md                   ← GUI applications by category (editors/networking/AI tools/productivity)
     ├── dev-languages.md              ← Language version managers (nvm/pyenv/sdkman/rustup)
     ├── brewfile-reference.md         ← Brewfile syntax + templates + recommended apps
     ├── macos-defaults.md             ← macOS defaults commands for system preferences
@@ -207,19 +208,9 @@ brew install lazygit gh git-delta
 brew install jq htop
 ```
 
-### IDE & GUI Applications
+### GUI Applications
 
-Recommend based on the user's dev focus:
-
-```bash
-# Code editors
-brew install --cask visual-studio-code
-brew install --cask cursor
-
-# Productivity
-brew install --cask raycast        # Spotlight replacement
-brew install --cask rectangle      # Window manager
-```
+Read `references/gui-apps.md` for recommended GUI applications by category (code editors, productivity, networking, AI tools, browsers). Tailor recommendations based on the user's development focus.
 
 ## Stage 5: System Optimization
 
@@ -229,11 +220,12 @@ Read `references/macos-defaults.md` for batch system optimization via `defaults`
 
 ### Utility Tools
 
-Read `references/cli-tools.md` for:
-- **tldr** — Simplified man pages
-- **rsync** / **unison** — File synchronization (unidirectional / bidirectional)
-- **SwitchHosts** — Host file switcher
-- **Snipaste** — Screenshot pinning tool
+Read `references/cli-tools.md` for CLI utilities like `tldr`, `rsync`, `unison`.
+
+Read `references/gui-apps.md` for GUI applications including:
+- **Networking & Proxy** — Tailscale, ClashX, SwitchHosts
+- **Screenshot & Annotation** — Snipaste, CleanShot X
+- **AI & LLM** — Ollama, LM Studio, QwenPaw, CC-Switch
 
 ### Brewfile Export (Future Migration)
 
@@ -263,7 +255,8 @@ When the user asks about a specific topic, read the corresponding reference file
 | Vim ~/.vimrc | references/vim-config.md |
 | Tmux ~/.tmux.conf | references/tmux-config.md |
 | SSH ~/.ssh/config | references/ssh-config.md |
-| CLI tools (ripgrep/fzf/etc) | references/cli-tools.md |
+| CLI tools (ripgrep/fzf/opencode/claude code) | references/cli-tools.md |
+| GUI apps (editors/networking/AI/productivity) | references/gui-apps.md |
 | Language managers | references/dev-languages.md |
 | Brewfile | references/brewfile-reference.md |
 | macOS defaults | references/macos-defaults.md |

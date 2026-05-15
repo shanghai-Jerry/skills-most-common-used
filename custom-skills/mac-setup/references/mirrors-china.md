@@ -117,19 +117,34 @@ go env GOPROXY
 
 ### Registry Mirrors
 
-Edit or create `~/.docker/daemon.json`:
+Edit or create `~/.docker/daemon.json`：
 
 ```json
 {
   "registry-mirrors": [
-    "https://mirror.ccs.tencentyun.com",
-    "https://docker.mirrors.ustc.edu.cn",
-    "https://registry.docker-cn.com"
+    "https://docker.1ms.run",
+    "https://docker.xuanyuan.me"
   ]
 }
 ```
 
-Then restart Docker.
+Then restart Docker：
+
+```bash
+# Docker Desktop：点击菜单栏 Docker 图标 → Restart
+
+# Or via command line（OrbStack / Colima 等基于 Lima 的运行时）：
+# OrbStack
+orbctl restart
+
+# Colima
+colima stop && colima start
+```
+
+> **Tip**：如果 `~/.docker/daemon.json` 已存在，只修改 `registry-mirrors` 字段即可，保留其他配置。验证镜像是否生效：
+> ```bash
+> docker info | grep -A 5 "Registry Mirrors"
+> ```
 
 ## Ruby
 
@@ -206,7 +221,7 @@ export https_proxy=http://127.0.0.1:7890
 | npm | Taobao | `npm config set registry https://registry.npmmirror.com` |
 | pip | Tsinghua | `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple` |
 | Go | goproxy.cn | `go env -w GOPROXY=https://goproxy.cn,direct` |
-| Docker | Tencent/USTC | Edit daemon.json |
+| Docker | 1ms.run/xuanyuan.me | Edit daemon.json |
 | Ruby | RubyChina | `gem sources --add https://gems.ruby-china.com/` |
 | Maven | Aliyun | Edit settings.xml |
 | Gradle | Aliyun | Edit init.gradle |

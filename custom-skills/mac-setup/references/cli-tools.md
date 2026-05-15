@@ -29,6 +29,13 @@ Modern CLI tools and utilities for daily development workflow, plus the classic 
 | `gh` | `brew install gh` | GitHub CLI: manage PRs, Issues, Actions |
 | `tig` | `brew install tig` | Interactive git viewer |
 
+### AI Coding Assistants
+
+| Tool | Install | Description |
+|------|---------|-------------|
+| opencode | `brew install opencode` | AI-powered CLI coding assistant with Skills/MCP/plugin support, multi-model |
+| claude code | `npm install -g @anthropic-ai/claude-code` | Anthropic's official AI coding assistant in the terminal |
+
 ### Utilities
 
 | Tool | Install | Description |
@@ -256,63 +263,4 @@ colorls -la
 colorls --tree
 ```
 
-## GUI Utility Tools (from CSDN Article)
 
-### SwitchHosts — Host File Switcher
-
-Manage multiple hosts configurations for different environments (dev, staging, production):
-
-```bash
-brew install --cask switchhosts
-```
-
-Use case: Switch between different API endpoints or proxy settings by toggling host file configurations.
-
-Example host configuration:
-```
-# Development
-127.0.0.1 api.local.dev
-127.0.0.1 proxy.golang.org
-
-# Production (comment out development entries)
-# 127.0.0.1 api.local.dev
-```
-
-### Snipaste — Screenshot Pinning
-
-Take screenshots and pin them to the screen as floating windows:
-
-```bash
-brew install --cask snipaste
-```
-
-Key features:
-- `F1` — Take screenshot and pin to screen
-- `F3` — Pin image from clipboard
-- `Click pin` — Edit, resize, or annotate
-- `Esc` — Close pinned screenshot
-
-### Other Recommended GUI Tools
-
-```bash
-# Window management
-brew install --cask rectangle
-
-# Spotlight replacement / launcher
-brew install --cask raycast
-
-# Password manager
-brew install --cask bitwarden
-
-# API testing
-brew install --cask postman
-
-# Screen recording
-brew install --cask cleanshot-x
-
-# Note-taking
-brew install --cask obsidian
-
-# Browser
-brew install --cask arc
-```
