@@ -19,7 +19,7 @@ mac-setup/
     ├── vim-config.md                 ← ~/.vimrc complete template
     ├── tmux-config.md                ← ~/.tmux.conf complete template (C-a prefix/mouse/UI design)
     ├── ssh-config.md                 ← ~/.ssh/config format + port forwarding
-    ├── cli-tools.md                  ← Modern CLI tools (ripgrep/fzf/lazygit/tldr/opencode/claude code)
+    ├── cli-tools.md                  ← Modern CLI tools (ripgrep/fzf/lazygit/tldr/opencode/claude code/openskills)
     ├── gui-apps.md                   ← GUI applications by category (editors/networking/AI tools/productivity)
     ├── dev-languages.md              ← Language version managers (nvm/pyenv/sdkman/rustup)
     ├── brewfile-reference.md         ← Brewfile syntax + templates + recommended apps
@@ -208,6 +208,17 @@ brew install lazygit gh git-delta
 brew install jq htop
 ```
 
+### OpenSkills (Skills Manager)
+
+Install the OpenSkills manager to discover and install agent skills:
+
+```bash
+npm install -g openskills
+
+# Verify installation
+openskills --version
+```
+
 ### GUI Applications
 
 Read `references/gui-apps.md` for recommended GUI applications by category (code editors, productivity, networking, AI tools, browsers). Tailor recommendations based on the user's development focus.
@@ -255,7 +266,7 @@ When the user asks about a specific topic, read the corresponding reference file
 | Vim ~/.vimrc | references/vim-config.md |
 | Tmux ~/.tmux.conf | references/tmux-config.md |
 | SSH ~/.ssh/config | references/ssh-config.md |
-| CLI tools (ripgrep/fzf/opencode/claude code) | references/cli-tools.md |
+| CLI tools (ripgrep/fzf/opencode/claude code/openskills) | references/cli-tools.md |
 | GUI apps (editors/networking/AI/productivity) | references/gui-apps.md |
 | Language managers | references/dev-languages.md |
 | Brewfile | references/brewfile-reference.md |
