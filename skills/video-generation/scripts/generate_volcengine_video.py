@@ -89,7 +89,7 @@ def generate_video(
     )
     #resp.raise_for_status()
     task_data = resp.json()
-    task_id = task_data.get("task_id", "")
+    task_id = task_data.get("task_id", "") or task_data.get("id", "")
     if not task_id:
         return f"Failed to submit task: {task_data}"
 
