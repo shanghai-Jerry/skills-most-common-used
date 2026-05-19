@@ -13,9 +13,9 @@ import sys
 
 import requests
 
-API_BASE = "https://ark.cn-beijing.volces.com/api/v3"
-DEFAULT_MODEL = "doubao-seedream-4-5-251128"
-DEFAULT_SIZE = "2K"
+API_BASE = os.getenv("VOLCENGINE_API_BASE", "https://ark.cn-beijing.volces.com/api/v3")
+DEFAULT_MODEL = os.getenv("VOLCENGINE_IMAGE_MODEL", "doubao-seedream-4-5-251128")
+DEFAULT_SIZE = os.getenv("VOLCENGINE_IMAGE_SIZE", "2K")
 
 
 def generate_image(
@@ -49,11 +49,12 @@ def generate_image(
         "Content-Type": "application/json",
     }
 
+    watermark = os.getenv("VOLCENGINE_WATERMARK", "false").lower() in ("true", "1", "yes")
     body: dict = {
         "model": model,
         "prompt": prompt,
         "size": size,
-        "watermark": False
+        "watermark": watermark,
     }
     if seed is not None:
         body["seed"] = seed

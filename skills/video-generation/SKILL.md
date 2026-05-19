@@ -14,9 +14,17 @@ This skill generates high-quality videos and images using structured prompts and
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `ARK_API_KEY` | Yes | Volcengine Ark API key. Must be set before running any generation commands. Obtain from the Volcengine Ark console. |
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `ARK_API_KEY` | Yes | — | Volcengine Ark API key. Must be set before running any generation commands. |
+| `VOLCENGINE_API_BASE` | No | `https://ark.cn-beijing.volces.com/api/v3` | Volcengine Ark API base URL (for different regions). |
+| `VOLCENGINE_IMAGE_MODEL` | No | `doubao-seedream-4-5-251128` | Default model for image generation. |
+| `VOLCENGINE_IMAGE_SIZE` | No | `2K` | Default image size (e.g. `2K`, `4K`, `1024x1024`). |
+| `VOLCENGINE_VIDEO_MODEL` | No | `doubao-seedance-1-5-pro-251215` | Default model for video generation. |
+| `VOLCENGINE_VIDEO_DURATION` | No | `5` | Default video duration in seconds. |
+| `VOLCENGINE_VIDEO_RATIO` | No | `16:9` | Default aspect ratio for video. |
+| `VOLCENGINE_POLL_INTERVAL` | No | `5` | Polling interval (seconds) for async video task status. |
+| `VOLCENGINE_WATERMARK` | No | `false` | Whether to add watermark to generated content. |
 
 > These variables must be available in the environment when the agent executes the Python scripts. The agent should ensure they are set before proceeding.
 

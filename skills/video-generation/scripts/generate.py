@@ -9,7 +9,7 @@ def generate_video(
     prompt_file: str,
     reference_images: list[str],
     output_file: str,
-    aspect_ratio: str = "16:9",
+    aspect_ratio: str = os.getenv("GEMINI_ASPECT_RATIO", "16:9"),
 ) -> str:
     with open(prompt_file, "r", encoding="utf-8") as f:
         prompt = f.read()
@@ -33,8 +33,9 @@ def generate_video(
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         return "GEMINI_API_KEY is not set"
+    model = os.getenv("GEMINI_VIDEO_MODEL", "veo-3.1-generate-preview")
     response = requests.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/veo-3.1-generate-preview:predictLongRunning",
+        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:predictLongRunning",
         headers={
             "x-goog-api-key": api_key,
             "Content-Type": "application/json",
@@ -56,7 +57,8 @@ def generate_video(
             url = sample["video"]["uri"]
             download(url, output_file)
             break
-        time.sleep(3)
+        poll_interval = int(os.getenv("GEMINI_POLL_INTERVAL", "3"))
+        time.sleep(poll_interval)
     return f"The video has been generated successfully to {output_file}"
 
 
@@ -97,7 +99,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--aspect-ratio",
         required=False,
-        default="16:9",
+        default=os.getenv("GEMINI_ASPECT_RATIO", "16:9"),
         help="Aspect ratio of the generated image",
     )
 

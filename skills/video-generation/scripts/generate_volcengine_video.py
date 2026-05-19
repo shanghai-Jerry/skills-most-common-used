@@ -16,9 +16,9 @@ import time
 
 import requests
 
-API_BASE = "https://ark.cn-beijing.volces.com/api/v3"
-DEFAULT_MODEL = "doubao-seedance-1-5-pro-251215"
-POLL_INTERVAL = 5  # seconds
+API_BASE = os.getenv("VOLCENGINE_API_BASE", "https://ark.cn-beijing.volces.com/api/v3")
+DEFAULT_MODEL = os.getenv("VOLCENGINE_VIDEO_MODEL", "doubao-seedance-1-5-pro-251215")
+POLL_INTERVAL = int(os.getenv("VOLCENGINE_POLL_INTERVAL", "5"))
 
 
 def generate_video(
@@ -26,8 +26,8 @@ def generate_video(
     output_file: str,
     reference_images: list[str] | None = None,
     model: str = DEFAULT_MODEL,
-    duration: int = 5,
-    ratio: str = "16:9",
+    duration: int = int(os.getenv("VOLCENGINE_VIDEO_DURATION", "5")),
+    ratio: str = os.getenv("VOLCENGINE_VIDEO_RATIO", "16:9"),
     generate_audio: bool = False,
 ) -> str:
     """Submit a video generation task and poll until complete, then download.
@@ -67,12 +67,13 @@ def generate_video(
                 })
 
     # Build request body
+    watermark = os.getenv("VOLCENGINE_WATERMARK", "false").lower() in ("true", "1", "yes")
     body: dict = {
         "model": model,
         "content": content,
         "duration": duration,
         "ratio": ratio,
-        "watermark": False,
+        "watermark": watermark,
     }
     if generate_audio:
         body["generate_audio"] = True
@@ -167,15 +168,16 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--duration",
-        default=5,
+        type=int,
+        default=int(os.getenv("VOLCENGINE_VIDEO_DURATION", "5")),
         choices=[5, 10],
-        help="Video duration in seconds (default: 5)",
+        help="Video duration in seconds",
     )
     parser.add_argument(
         "--ratio",
-        default="16:9",
+        default=os.getenv("VOLCENGINE_VIDEO_RATIO", "16:9"),
         choices=["16:9", "9:16", "1:1"],
-        help="Aspect ratio (default: 16:9)",
+        help="Aspect ratio",
     )
     parser.add_argument(
         "--generate-audio",

@@ -9,6 +9,14 @@ description: Use this skill when the user requests to generate, create, imagine,
 
 This skill generates high-quality images using structured prompts and a Python script. The workflow includes creating JSON-formatted prompts and executing image generation with optional reference images.
 
+## Environment Variables
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `GEMINI_API_KEY` | Yes | — | Google Gemini API key. Must be set before running generation commands. |
+| `GEMINI_IMAGE_MODEL` | No | `gemini-3-pro-image-preview` | Default model for image generation. |
+| `GEMINI_ASPECT_RATIO` | No | `16:9` | Default aspect ratio for generated images. |
+
 ## Core Capabilities
 
 - Create structured JSON prompts for AIGC image generation

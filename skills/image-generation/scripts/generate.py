@@ -65,8 +65,9 @@ def generate_image(
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         return "GEMINI_API_KEY is not set"
+    model = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3-pro-image-preview")
     response = requests.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent",
+        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
         headers={
             "x-goog-api-key": api_key,
             "Content-Type": "application/json",
@@ -113,7 +114,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--aspect-ratio",
         required=False,
-        default="16:9",
+        default=os.getenv("GEMINI_ASPECT_RATIO", "16:9"),
         help="Aspect ratio of the generated image",
     )
 
